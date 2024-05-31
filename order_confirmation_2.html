@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .header {
+            text-align: center;
+        }
+
+        .order-details {
+            margin-top: 20px;
+        }
+
+        .order-details th,
+        .order-details td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        .order-details th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="{{store_logo}}" alt="Store Logo" style="max-width: 100px;">
+            <h1>Thank you for your order, {{customer_first_name}}!</h1>
+        </div>
+        <div class="order-details">
+            <h2>Order Details</h2>
+            <p><strong>Order No:</strong> {{order_no}}</p>
+            <p><strong>Order Date:</strong> {{order_date}}</p>
+            <table border="1" cellspacing="0" cellpadding="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Qty</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#items}}
+                    <tr>
+                        <td>{{name}}</td>
+                        <td>{{qty}}</td>
+                        <td>{{price}}</td>
+                        <td>{{subtotal}}</td>
+                    </tr>
+                    {{/items}}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3"><strong>Subtotal</strong></td>
+                        <td>{{subtotal_amount}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"><strong>Total</strong></td>
+                        <td>{{total_amount}}</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="footer">
+            <p>If you have any questions, feel free to contact us at <a
+                    href="mailto:{{shipping_address.email}}">{{shipping_address.email}}</a>.</p>
+        </div>
+    </div>
+</body>
+
+</html>
