@@ -1,42 +1,61 @@
 require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
-const nodemailer = require('nodemailer');
+const express = require('express');
+const bodyParser = require('body-parser');
+const { SESClient, SendEmailCommand } = require('@aws-sdk/client-ses');
 const Mustache = require('mustache');
+const cors = require('cors');
 
-module.exports = async (req, res) => {
-    // Load the JSON data
-    const data = JSON.parse(fs.readFileSync(path.join(__dirname, 'data.json'), 'utf8'));
+const app = express();
+const PORT = process.env.PORT || 3001;
+
+app.use(bodyParser.json());
+app.use(cors());
+app.options('*', cors());
+
+app.post('/send-email', async (req, res) => {
+    const { templateName, data } = req.body;
 
     // Load the email template
-    const template = fs.readFileSync(path.join(__dirname, 'order_confirmation_1.html'), 'utf8');
+    const template = fs.readFileSync(path.join(__dirname, `./templates/${templateName}.html`), 'utf8');
 
     // Generate the email content using Mustache
     const emailContent = Mustache.render(template, data);
 
-    // Create a transporter object using SMTP transport
-    const transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_PASS
-        }
-    });
+    const client = new SESClient({
+        credentials: {
+            accessKeyId: process.env.S3_ACCESS_KEY,
+            secretAccessKey: process.env.S3_SECRET
+        },
+        region: process.env.S3_REGION,
+    })
 
-    // Setup email data
-    const mailOptions = {
-        from: process.env.EMAIL_USER,
-        to: data.shipping_address.email,
-        subject: 'Order Confirmation - ' + data.order_no,
-        html: emailContent
+    const to = ['freelancing771@gmail.com']
+    const params = {
+        Destination: {
+            ToAddresses: to,
+        },
+        Message: {
+            Body: {
+                Html: { Data: emailContent },
+                Text: { Data: 'This is the text body of the email.' },
+            },
+            Subject: { Data: 'Order Confirmation - ' + data?.orderNo },
+        },
+        Source: process.env.EMAIL_USER,
     };
 
-    // Send the email
     try {
-        await transporter.sendMail(mailOptions);
+        const command = new SendEmailCommand(params);
+        await client.send(command);
         res.status(200).send('Message sent successfully');
     } catch (error) {
-        console.log(error);
+        console.error('Error sending email:', error);
         res.status(500).send('Failed to send message');
     }
-};
+});
+
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});

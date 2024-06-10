@@ -43,12 +43,12 @@
 <body>
     <div class="container">
         <div class="header">
-            <img src="{{store_logo}}" alt="Store Logo" style="max-width: 100px;">
-            <h1>Thank you for your order, {{customer_first_name}}!</h1>
+            <img src="https://zapvi.in/wp-content/uploads/2024/06/Zapvi-Logo-Light.png" alt="Store Logo" style="max-width: 100px;">
+            <h1>Thank you for your order, {{userFirstName}}!</h1>
         </div>
         <div class="order-details">
             <h2>Order Details</h2>
-            <p><strong>Order No:</strong> {{order_no}}</p>
+            <p><strong>Order No:</strong> {{orderNo}}</p>
             <p><strong>Order Date:</strong> {{order_date}}</p>
             <table border="1" cellspacing="0" cellpadding="0" width="100%">
                 <thead>
@@ -72,11 +72,11 @@
                 <tfoot>
                     <tr>
                         <td colspan="3"><strong>Subtotal</strong></td>
-                        <td>{{subtotal_amount}}</td>
+                        <td>{{amount.subtotal}}</td>
                     </tr>
                     <tr>
                         <td colspan="3"><strong>Total</strong></td>
-                        <td>{{total_amount}}</td>
+                        <td>{{amount.total}}</td>
                     </tr>
                 </tfoot>
             </table>

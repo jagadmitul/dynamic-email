@@ -128,6 +128,22 @@
         /* responsive */
         @media screen and (max-width: 640px) {
 
+            .font-header {
+                font-size: 5vw;
+            }
+            .font-tagline {
+                font-size: 4vw;
+            }
+            .font-desc {
+                font-size: 3vw;
+            }
+            .font-product {
+                font-size: 4vw;
+            }
+            .font-quantity {
+                font-size: 2vw;
+            }
+
             td.img-responsive img {
                 width: 100% !important;
                 max-width: 100% !important;
@@ -223,7 +239,8 @@
                                                                             <img width="100"
                                                                                 style="display:block;width:100%;max-width:100px;padding-bottom: 10px;padding-top: 10px;"
                                                                                 alt="img"
-                                                                                src="https://zapvi.in/wp-content/uploads/2024/02/Zapvi-Logo-Light.svg">
+                                                                                src="https://zapvi.in/wp-content/uploads/2024/06/Zapvi-Logo-Light.png">
+                                                                        </td>
                                                                         <td>&nbsp;</td>
                                                                         <td align="right"
                                                                             style="font-family:'DM Sans', Arial, Helvetica, sans-serif;font-size: 14px;color: #ffffff;">
@@ -297,7 +314,8 @@
                                                         </tr>
                                                         <tr>
                                                             <td align="center"
-                                                                style="font-family:'DM Sans', Arial, Helvetica, sans-serif;font-size: 30px;color: #070606;">
+                                                            class="font-header"
+                                                                style="font-family:'DM Sans', Arial, Helvetica, sans-serif;color: #070606;">
                                                                 Purchase confirmation</td>
                                                         </tr>
                                                         <tr>
@@ -305,7 +323,8 @@
                                                         </tr>
                                                         <tr>
                                                             <td align="center"
-                                                                style="font-family:'DM Sans', Arial, Helvetica, sans-serif;font-size: 24px;color: #070606;">
+                                                            class="font-tagline"
+                                                                style="font-family:'DM Sans', Arial, Helvetica, sans-serif;color: #070606;">
                                                                 Thanks for your purchase. We will send tracking
                                                                 info when your order ships. </td>
                                                         </tr>
@@ -314,7 +333,8 @@
                                                         </tr>
                                                         <tr>
                                                             <td align="center"
-                                                                style="font-family:'DM Sans', Arial, Helvetica, sans-serif;font-size: 15px;color: #070606;">
+                                                            class="font-desc"
+                                                                style="font-family:'DM Sans', Arial, Helvetica, sans-serif;color: #070606;">
                                                                 Get special goods and gifts only on our site.</td>
                                                         </tr>
                                                         <tr>
@@ -412,7 +432,7 @@
                                                                     <tr>
                                                                         <td
                                                                             style="font-family:'DM Sans', Arial, Helvetica, sans-serif;font-size: 13px;color: #070606;">
-                                                                            Order Number {{order_no}}</td>
+                                                                            Order Number {{orderNo}}</td>
                                                                         <td width="30">&nbsp;</td>
                                                                         <td align="right"
                                                                             style="font-family:'DM Sans', Arial, Helvetica, sans-serif;font-size: 13px;color: #070606;">
@@ -441,8 +461,7 @@
                                                                     <tr>
                                                                         <td width="130"><img width="130"
                                                                                 style="display:block;width:100%;max-width:130px;"
-                                                                                alt="img"
-                                                                                src="http://emailmug.com/premium-template/emailpaws/notif/pr1.jpg">
+                                                                                alt="img" src={{img}}>
                                                                         </td>
                                                                         <td width="20">&nbsp;</td>
                                                                         <td width="250">
@@ -450,12 +469,14 @@
                                                                                 cellpadding="0" cellspacing="0">
                                                                                 <tr>
                                                                                     <td
-                                                                                        style="font-family:'DM Sans', Arial, Helvetica, sans-serif;font-size: 18px;color: #070606;line-height: 21px;">
+                                                                                    class="font-product"
+                                                                                        style="font-family:'DM Sans', Arial, Helvetica, sans-serif;color: #070606;line-height: 21px;">
                                                                                         {{name}}</td>
                                                                                 </tr>
                                                                                 <tr>
                                                                                     <td
-                                                                                        style="font-family:'DM Sans', Arial, Helvetica, sans-serif;font-size: 14px;color: #070606;line-height: 21px;">
+                                                                                    class="font-quantity"
+                                                                                        style="font-family:'DM Sans', Arial, Helvetica, sans-serif;color: #070606;line-height: 21px;">
                                                                                         Quantitiy : {{qty}}</td>
                                                                                 </tr>
 
@@ -510,7 +531,7 @@
                                                                         <td>&nbsp;</td>
                                                                         <td align="right"
                                                                             style="font-family:'DM Sans', Arial, Helvetica, sans-serif;font-size: 14px;color: #070606;">
-                                                                            ₹ {{subtotal_amount}}</td>
+                                                                            ₹ {{amount.subtotal}}</td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td
@@ -519,7 +540,7 @@
                                                                         <td>&nbsp;</td>
                                                                         <td align="right"
                                                                             style="font-family:'DM Sans', Arial, Helvetica, sans-serif;font-size: 14px;color: #070606;">
-                                                                            ₹ {{shipping_charge}}</td>
+                                                                            ₹ {{amount.shipping}}</td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td
@@ -528,7 +549,7 @@
                                                                         <td>&nbsp;</td>
                                                                         <td align="right"
                                                                             style="font-family:'DM Sans', Arial, Helvetica, sans-serif;font-size: 14px;color: #070606;">
-                                                                            ₹ 0</td>
+                                                                            ₹ {{amount.tax}}</td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td
@@ -537,7 +558,7 @@
                                                                         <td>&nbsp;</td>
                                                                         <td align="right"
                                                                             style="font-family:'DM Sans', Arial, Helvetica, sans-serif;font-size: 14px;color: #070606;">
-                                                                            ₹ {{discount}}</td>
+                                                                            ₹ {{amount.discount}}</td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td
@@ -546,7 +567,7 @@
                                                                         <td>&nbsp;</td>
                                                                         <td align="right"
                                                                             style="font-family:'DM Sans', Arial, Helvetica, sans-serif;font-size: 18px;color: #070606;">
-                                                                            <strong>₹ {{total_amount}}</strong>
+                                                                            <strong>₹ {{amount.total}}</strong>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -671,12 +692,11 @@
                                                                                             <tr>
                                                                                                 <td
                                                                                                     style="font-family:'DM Sans', Arial, Helvetica, sans-serif;font-size: 13px;color: #070606;line-height: 22px;">
-                                                                                                    Christina Aguelera
-                                                                                                    <br>21 Very Good
-                                                                                                    Street
-                                                                                                    <br>California, LA
-                                                                                                    90002 <br>United
-                                                                                                    States
+                                                                                                    {{billing_address.address}}<br>
+                                                                                                    {{billing_address.city}}<br>
+                                                                                                    {{billing_address.country}}<br>
+                                                                                                    {{billing_address.zip}}<br>
+                                                                                                    {{billing_address.phone}}
                                                                                                 </td>
                                                                                             </tr>
                                                                                             <tr>
@@ -758,9 +778,12 @@
                                                                                 <tr>
                                                                                     <td
                                                                                         style="font-family:'DM Sans', Arial, Helvetica, sans-serif;font-size: 13px;color: #070606;line-height: 22px;">
-                                                                                        Christina Aguelera <br>21 Very
-                                                                                        Good Street <br>California, LA
-                                                                                        90002 <br>United States</td>
+                                                                                        {{shipping_address.address}}<br>
+                                                                                        {{shipping_address.city}}<br>
+                                                                                        {{shipping_address.country}}<br>
+                                                                                        {{shipping_address.zip}}<br>
+                                                                                        {{shipping_address.phone}}
+                                                                                    </td>
                                                                                 </tr>
                                                                                 <tr>
                                                                                     <td height="30">&nbsp;</td>
